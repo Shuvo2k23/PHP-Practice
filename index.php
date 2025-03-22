@@ -9,7 +9,7 @@
 <body>
     <table id="main" border="0" cellspacing='0'>
     <tr>
-        <td>
+        <td colspan="2">
             <h1>PHP with Ajax</h1>
         </td>
     </tr>
@@ -24,14 +24,18 @@
             </form>
         
         </td>
+        <td id="s-box">
+            <h3>Type to live search... </h3>
+            <input type="text" autocomplete="off" id="search">
+        </td>
     </tr>
     <tr>
-        <td id="table-data">
+        <td id="table-data" colspan="2">
             
         </td>
     </tr>
     <tr>
-        <td>
+        <td colspan="2">
             <h1 id="messege"></h1>
         </td>
     </tr>
@@ -165,6 +169,20 @@
                         else
                         $("#messege").text("Update Error Brooo!!");
                         
+                    }
+                })
+            });
+
+            //live-search
+            $("#search").on("keyup",function(e){
+                $sItem = $(this).val();
+                
+                $.ajax({
+                    url:"ajax-live-search.php",
+                    type:"POST",
+                    data:{item: $sItem},
+                    success: function(data){
+                        $("#table-data").html(data);
                     }
                 })
             });
