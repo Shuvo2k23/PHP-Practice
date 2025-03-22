@@ -18,3 +18,14 @@ td{
 #messege{
     color: red;
 }
+.del{
+    background-color:rgb(230, 56, 56);
+    color: white;
+    border-radius: 7px;
+    border: 0px;
+    height: 30px;
+    width: 70px;
+}
+.del:hover{
+    background-color: brown;
+}

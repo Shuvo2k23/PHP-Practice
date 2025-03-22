@@ -39,7 +39,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script type="text/javascript">
        $(document).ready(function(){
-            function loadTable(e){
+            function loadTable(){
                 $.ajax({
                     url:"ajax-load.php",
                     type:"POST",
@@ -79,6 +79,28 @@
                 }
             });
 
+
+            $(document).on("click",".del", function(event){
+                if(confirm("Do you really want to delete this record?")){
+                    var studentId = $(this).data("id");
+                    console.log(studentId);
+                    var element = this;
+                    $.ajax({
+                        url: "delete-ajax.php",
+                        type: "POST",
+                        data:{id: studentId},
+                        success: function(value){
+                            if(value == 1){
+                                $("#messege").text("Deleted Successfuly!!");
+                                $(element).closest("tr").fadeOut();
+                            }
+                            else{
+                                $("#messege").text("Error Hay Bro!!");
+                            }
+                        }
+                    });
+                } 
+            });
         });
        
     </script>
