@@ -1,0 +1,45 @@
+#up{
+    width: 100%;
+}
+#body{
+    background:wheat;
+    width: 90%;
+    left: 5%;
+    position: fixed;
+    margin: 5px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 4px;
+}
+#head{
+    text-align: center;
+    background: #f7dbdb;
+}
+#pagination{
+    width: 50%;
+    position: absolute;
+    left: 25%;
+    margin-top: 20px;
+    
+}    
+#pagination a{
+    border: 1px solid black;
+    border-radius: 4px;
+    background: #963f3f;
+    color: wheat;
+    margin: 5px;
+    padding: 5px;
+    
+}
+.active{
+    background: #fd0000 !important;
+}
+#ajaxbtn{
+    color: #fc0202 !important;
+    background-color: antiquewhite;
+    height: 40px;
+    width: 90px;
+    border: none;
+    border-radius: 4px;
+    margin: 5px;
+}
