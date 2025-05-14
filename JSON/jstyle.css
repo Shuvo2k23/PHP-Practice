@@ -1,0 +1,21 @@
+
+h1{
+    color: red;
+}
+#top{
+    background: bisque;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+#container{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+#load-data, #load-data1{
+    border-radius: 5px;
+    border: 1px solid white;
+    background-color:rgb(245, 232, 214);
+    text-align: center;
+}
