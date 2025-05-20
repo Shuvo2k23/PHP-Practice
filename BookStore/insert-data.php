@@ -20,7 +20,7 @@
         
     }
     else{
-        echo "<h1>Insertion failed.!!</h1>";
+        echo "<h1 style='color:green'>Insertion failed.!!</h1>";
     }
     
 ?>
