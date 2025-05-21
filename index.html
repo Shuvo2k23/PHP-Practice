@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+    <div id="header">
+        <div><h1>Rest API</h1></div>
+        <div id="searchbox">
+            <h3>Type to search... </h3>
+            <input type="text" id="searchbar">
+
+        </div>
+    </div>
+    <div id="insert">
+        <form action="">
+            <label for=""><b>First Name: </b></label>
+            <input type="text" id="fname"><br>
+            <label for=""><b>Last Name:  </b> </label>
+            <input type="text" id="lname"><br>
+            <button id="submit">Submit</button>
+        </form>
+    </div>
+    <div id="main">
+        <table id="table-data" border="1" cellspacing="0">
+            <tr>
+                <th>ID</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            
+        </table>
+    </div>
+    <div id="modal">
+        <div id="modalbox">
+        <form action="">
+            <label for=""><b>First Name: </b></label>
+            <input type="text" id="efirst"><br>
+            <label for=""><b>Last Name:  </b> </label>
+            <input type="text" id="elast"><br><br>
+            <button id="edited">Done</button>
+            
+        </form>
+        <button id="close"> X </button>
+        </div>
+       
+    </div>
+    <div id="error">
+        
+    </div>
+    <script src="JS/jquery.js"></script>
+    <script>
+        $(document).ready(function(){
+            function loadData(){
+                $.ajax({
+                url:"http://localhost/phpapi/api-fetch-all.php",
+                type:"GET",
+                success:function(data){
+                    if(data.status==false){
+                        $("#error").html(
+                            "<h2>"+data.messege+"</h2>"
+                        )
+                    }
+                    else{
+                        $.each(data,function(key,val){
+                            $("#table-data").append(
+                                "<tr><td>"+val.id +"</td><td>"
+                                    +val.first_name+"</td><td>"
+                                    +val.last_name
+                                    +"</td><td><button class='edit' data-id='"+val.id
+                                    +"'>Edit</button></td><td><button class='delete' data-id='"
+                                    +val.id +" '>Delete</button></td></tr>" 
+                            )
+                        })
+                    }
+                }});
+            }
+            loadData();
+           
+            $(document).on("click",".delete",function(event){
+                var id = $(this).data('id');
+                var obj = {sid: id};
+                var element = this;
+                var jsonId = JSON.stringify(obj);
+                console.log(jsonId);
+                if(confirm("Are you sure to delete this item??")){
+                    $.ajax({
+                        url:"http://localhost/phpapi/api-delete.php",
+                        type:"DELETE",
+                        data:jsonId, 
+                        success: function(data){
+                            if(data.status==false)
+                            {
+                                $("#error").html(
+                                "<h2>"+data.messege+"</h2>"
+                            )
+                            }
+                            else{
+                                $(element).closest("tr").fadeOut();
+                            }
+                        }
+                    })
+                }
+                
+            });
+            //insert
+            $("#submit").on("click",function(event){
+                event.preventDefault();
+                var fname = $("#fname").val();
+                var lname = $("#lname").val();
+                var obj = {fname:fname,lname:lname};
+                var jsonData = JSON.stringify(obj);
+                if(fname!="" && lname!=""){
+                    $.ajax({
+                        url:"http://localhost/phpapi/api-insert.php",
+                        type:"POST",
+                        data:jsonData, 
+                        success: function(data){
+                            $("#table-data").append(
+                                "<tr><td>"+val.id +"</td><td>"
+                                    +val.first_name+"</td><td>"
+                                    +val.last_name
+                                    +"</td><td><button class='edit' data-id='"+val.id
+                                    +"'>Edit</button></td><td><button class='delete' data-id='"
+                                    +val.id +" '>Delete</button></td></tr>" 
+                            )
+                        }
+                    })
+                }
+                else{
+                    $("#error").html(
+                        "<h2>"+"Invalid Input"+"</h2>"
+                    )
+                }
+            });
+            $(document).on("click",".edit",function(event){
+                $("#modal").show();
+                var id = $(this).data('id');
+                var obj = {sid: id};
+                var jsonId = JSON.stringify(obj);
+                console.log(jsonId);
+            });
+            $(document).on("click","#close",function(event){
+                $("#modal").hide();
+            });
+            $(document).on("click","#edited",function(event){
+                $("#modal").hide();
+            });
+        });
+    </script>
+</body>
+</html>
