@@ -2,7 +2,7 @@
   background: wheat;
   width: 90%;
   left: 5%;
-  position: fixed;
+  position:relative;
   margin: 5px;
   padding: 10px;
   text-align: center;

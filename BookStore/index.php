@@ -19,7 +19,6 @@
             <a href="insert.php">
                 <button style="height: 40px; font-size:20px; border-radius:5px;background-color:rgb(186, 55, 226); color:wheat">Add Book</button>
             </a>
-            
         </td>
         
     </tr>
@@ -36,8 +35,5 @@
         </td>
     </tr>
     </table>
-   
-    
-    
 </body>
 </html>

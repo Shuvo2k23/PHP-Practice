@@ -20,7 +20,7 @@
                             <td>{$book->pages}</td>
                             <td>{$book->isbn}</td>
                             <td><a href='edit-book.php?id={$key}'><button class='edit'>Edit</button></a></td>
-                            <td><a href='delete-book.php?id={$key}'><button class='del'>Delete</button></a></td></tr>";
+                            <td><a href='delete-book.php?id={$key}'><button class='del' onclick=\"return confirm('Are you sure?')\">Delete</button></a></td></tr>";
         }
         $output .= "</table>";
         echo $output;
